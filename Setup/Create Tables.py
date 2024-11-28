@@ -86,3 +86,14 @@
 # MAGIC   CONTACTFIRSTNAME STRING
 # MAGIC );
 # MAGIC
+# MAGIC --Create core products:
+# MAGIC DROP TABLE IF EXISTS core.products;
+# MAGIC CREATE TABLE core.products (
+# MAGIC   Product_Pk  INT NOT NULL,
+# MAGIC   Product_Id STRING,
+# MAGIC   Product STRING,
+# MAGIC   Brand STRING,
+# MAGIC   Category STRING,
+# MAGIC   Subcategory STRING
+# MAGIC );
+# MAGIC

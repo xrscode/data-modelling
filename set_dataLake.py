@@ -42,3 +42,4 @@ DataLake             = dbutils.secrets.get(scope=secret_scope, key="DataLake")
 sample_sales         = DataLake + "RAW/sales_data.csv"
 products             = DataLake + 'RAW/products.csv'
 schema               = DataLake + 'schema/'
+prod_core            = DataLake + 'CORE/products.parquet'
