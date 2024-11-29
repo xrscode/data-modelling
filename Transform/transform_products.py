@@ -4,17 +4,23 @@
 # COMMAND ----------
 
 # DBTITLE 1,Query
+# Select values where the product_pk in staging is greater than the product_pk in core.
 query = """
 SELECT
-    product_pk              AS Product_Pk
-,   product_id              AS Product_Id
-,   SUBSTRING_INDEX(TRIM(REPLACE(product_brand, '\t', '')), '(', 1)           AS Product
-,   SUBSTRING(product_brand, INSTR(product_brand, "(") + 1, INSTR(product_brand, ")") - INSTR(product_brand, "(") - 1) AS Brand
-,   category                AS Category
-,   sub_category            AS Subcategory
+    product_pk AS Product_Pk,
+    product_id AS Product_Id,
+    SUBSTRING_INDEX(TRIM(REPLACE(product_brand, '\t', '')), '(', 1) AS Product,
+    SUBSTRING(product_brand, INSTR(product_brand, "(") + 1, INSTR(product_brand, ")") - INSTR(product_brand, "(") - 1) AS Brand,
+    category AS Category,
+    sub_category AS Subcategory
 FROM staging.dim_product
+WHERE product_pk > (
+    SELECT COALESCE(MAX(product_pk), 0)
+    FROM core.products
+)
 """
 df = spark.sql(query)
+display(df)
 
 # COMMAND ----------
 

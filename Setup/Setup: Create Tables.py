@@ -1,6 +1,6 @@
 # Databricks notebook source
 # MAGIC %sql
-# MAGIC -- Setup schema for staging:
+# MAGIC --Setup schema for staging:
 # MAGIC DROP SCHEMA IF EXISTS staging CASCADE;
 # MAGIC CREATE SCHEMA staging;
 # MAGIC
@@ -10,19 +10,21 @@
 # MAGIC
 # MAGIC
 # MAGIC
-# MAGIC -- Setup up staging.sales table:
-# MAGIC CREATE TABLE IF NOT EXISTS staging.sales (
-# MAGIC   transaction_id INT,
-# MAGIC   transactional_date TIMESTAMP,
-# MAGIC   product_id STRING,
-# MAGIC   customer_id INT,
-# MAGIC   payment STRING,
-# MAGIC   credit_card BIGINT,
-# MAGIC   loyalty_card STRING,
-# MAGIC   cost DECIMAL(10,2),
-# MAGIC   quantity INT,
-# MAGIC   price DECIMAL(10,2)
+# MAGIC -- Setup up staging.public_Sales table:
+# MAGIC CREATE TABLE IF NOT EXISTS staging.public_sales (
+# MAGIC     transaction_id BIGINT GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1),
+# MAGIC     transactional_date timestamp,
+# MAGIC     product_id STRING,
+# MAGIC     customer_id integer,
+# MAGIC     payment STRING,
+# MAGIC     credit_card bigint,
+# MAGIC     loyalty_card STRING,
+# MAGIC     cost STRING,
+# MAGIC     quantity integer,
+# MAGIC     price numeric
 # MAGIC );
+# MAGIC
+# MAGIC
 # MAGIC
 # MAGIC -- Setup up core.sales fact table:
 # MAGIC CREATE TABLE IF NOT EXISTS core.sales (
