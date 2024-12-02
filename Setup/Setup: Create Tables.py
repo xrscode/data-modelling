@@ -8,6 +8,10 @@
 # MAGIC DROP SCHEMA IF EXISTS core CASCADE;
 # MAGIC CREATE SCHEMA core;
 # MAGIC
+# MAGIC --Setup schema for gold:
+# MAGIC DROP SCHEMA IF EXISTS gold CASCADE;
+# MAGIC CREATE SCHEMA gold;
+# MAGIC
 # MAGIC
 # MAGIC
 # MAGIC -- Setup up staging.public_Sales table:
@@ -89,7 +93,6 @@
 # MAGIC );
 # MAGIC
 # MAGIC --Create core products:
-# MAGIC DROP TABLE IF EXISTS core.products;
 # MAGIC CREATE TABLE core.products (
 # MAGIC   Product_Pk  INT NOT NULL,
 # MAGIC   Product_Id STRING,
@@ -98,4 +101,23 @@
 # MAGIC   Category STRING,
 # MAGIC   Subcategory STRING
 # MAGIC );
+# MAGIC
+# MAGIC --Create gold fact_sales:
+# MAGIC CREATE TABLE gold.fact_sales (
+# MAGIC   transaction_id INT,
+# MAGIC   transactional_date TIMESTAMP,
+# MAGIC   transactional_date_fk INT,
+# MAGIC   payment_pk INT,
+# MAGIC   cost DECIMAL(10,2),
+# MAGIC   product_id STRING,
+# MAGIC   customer_id INT,
+# MAGIC   credit_card INT,
+# MAGIC   quantity INT,
+# MAGIC   price DECIMAL(10,2),
+# MAGIC   total_price DECIMAL(10,2),
+# MAGIC   total_cost DECIMAL(10,2), 
+# MAGIC   profit DECIMAL(10,2)
+# MAGIC )
+# MAGIC
+# MAGIC
 # MAGIC

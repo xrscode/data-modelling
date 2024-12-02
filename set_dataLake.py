@@ -40,6 +40,7 @@ spark.conf.set(f"fs.azure.sas.fixed.token.{storage_account_name}.dfs.core.window
 # Set location to data lake and files:
 DataLake             = dbutils.secrets.get(scope=secret_scope, key="DataLake")
 sample_sales         = DataLake + "RAW/sales_data.csv"
+sample_sales_2       = DataLake + "RAW/Fact_Sales_2.csv"
 products             = DataLake + 'RAW/products.csv'
 schema               = DataLake + 'schema/'
 prod_core            = DataLake + 'CORE/products.parquet'
