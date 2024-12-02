@@ -39,7 +39,7 @@ df.createOrReplaceTempView("payment_tv")
 query = """
 SELECT 
     staging.public_sales.transaction_id
-,   CAST(staging.public_sales.transactional_date AS INT)
+,   staging.public_sales.transactional_date
 ,   CONCAT(YEAR(staging.public_sales.transactional_date), LPAD(MONTH(staging.public_sales.transactional_date), 2, '0'), LPAD(DAY(staging.public_sales.transactional_date), 2, '0')) AS transactional_date_fk
 ,   CAST(core.dim_payment.payment_pk AS INT) AS payment_pk
 ,   CAST(staging.public_sales.cost AS DECIMAL(10,2)) AS cost
